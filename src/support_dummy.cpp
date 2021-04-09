@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace Vc_VERSIONED_NAMESPACE
 {
-bool isImplementationSupported(Implementation impl) { return impl == ScalarImpl; }
+bool Vc_CDECL isImplementationSupported(Implementation impl) { return impl == ScalarImpl; }
 
 Vc::Implementation bestImplementationSupported() { return Vc::ScalarImpl; }
 

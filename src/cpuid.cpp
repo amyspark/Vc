@@ -128,7 +128,7 @@ static unsigned int CpuIdAmdAssociativityTable(int bits)
     return 0xffffffffu;
 }
 
-void CpuId::init()
+void Vc_CDECL CpuId::init()
 {
     {
         static bool done = false;
