@@ -235,6 +235,12 @@ install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}ConfigVersion.cmake
    DESTINATION ${PACKAGE_INSTALL_DESTINATION}
    )
+if (Vc_COMPILER_IS_MSVC)
+install(FILES
+   cmake/msvc_version.c
+   DESTINATION ${PACKAGE_INSTALL_DESTINATION}
+   )
+endif ()
 
 option(BUILD_TESTING "Build the testing tree." OFF)
 include (CTest)
