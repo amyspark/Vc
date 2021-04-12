@@ -419,6 +419,15 @@ macro(_vc_compile_one_implementation _srcs _impl)
          if("${_impl}" MATCHES "SSE")
             set(_ok TRUE)
          endif()
+
+         set(_vc_arch_macros "")
+
+         string(REPLACE "+" ";" _amyspark_flags "${_impl}")
+         foreach(_flag ${_amyspark_flags})
+            string(TOUPPER "${_flag}" _flag)
+            string(REPLACE "." "_" _flag "__${_flag}__")
+            list(APPEND _vc_arch_macros "${_flag}")
+         endforeach(_flag)
       endif()
 
       if(_ok)
@@ -432,7 +441,7 @@ macro(_vc_compile_one_implementation _srcs _impl)
             WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
             VERBATIM)
          set_source_files_properties( "${_out}" PROPERTIES
-            COMPILE_DEFINITIONS "Vc_IMPL=${_impl}"
+            COMPILE_DEFINITIONS "Vc_IMPL=${_impl};$<$<BOOL:Vc_COMPILER_IS_MSVC>:${_vc_arch_macros}>"
             COMPILE_FLAGS "${_flags} ${_extra_flags}"
          )
          list(APPEND ${_srcs} "${_out}")
